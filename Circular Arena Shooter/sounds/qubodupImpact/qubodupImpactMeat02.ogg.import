@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/qubodupImpactMeat02.ogg-97e5f4ad518150562f3988b5e5b96a15.oggstr"
+
+[deps]
+
+source_file="res://sounds/qubodupImpact/qubodupImpactMeat02.ogg"
+dest_files=[ "res://.import/qubodupImpactMeat02.ogg-97e5f4ad518150562f3988b5e5b96a15.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,310 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://obj/Hitbox.gd" type="Script" id=1]
+[ext_resource path="res://classes/Foe.gd" type="Script" id=2]
+[ext_resource path="res://foes/Slammer/Sprites/Ball@2x.png" type="Texture" id=3]
+[ext_resource path="res://foes/Slammer/SlammerMovement.gd" type="Script" id=4]
+[ext_resource path="res://shader/flash.gdshader" type="Shader" id=5]
+[ext_resource path="res://foes/Slammer/Sprites/Mask2@2x.png" type="Texture" id=6]
+[ext_resource path="res://foes/Slammer/Sprites/Gear_2@2x.png" type="Texture" id=7]
+[ext_resource path="res://foes/Slammer/Sprites/Body_1@2x.png" type="Texture" id=8]
+[ext_resource path="res://obj/StartAnimation.gd" type="Script" id=9]
+[ext_resource path="res://foes/Slammer/Sprites/UFO ring@2x.png" type="Texture" id=10]
+[ext_resource path="res://foes/Slammer/SquishBox.gd" type="Script" id=11]
+[ext_resource path="res://obj/RandomAudioStreamPlayer.gd" type="Script" id=12]
+[ext_resource path="res://foes/HitSFX.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactMining_004.ogg" type="AudioStream" id=14]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactMining_003.ogg" type="AudioStream" id=15]
+[ext_resource path="res://sounds/items/land.wav" type="AudioStream" id=16]
+[ext_resource path="res://sounds/items/itempick2.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/items/jump.wav" type="AudioStream" id=18]
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_mod = 0.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 168.5 )
+
+[sub_resource type="CanvasItemMaterial" id=7]
+light_mode = 2
+
+[sub_resource type="Animation" id=8]
+resource_name = "Movement"
+length = 4.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ball:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Gear:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 0.366021, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Gear2:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.1, 2.58147 ),
+"transitions": PoolRealArray( 0.574349, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ball:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Gear:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Gear2:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.825806, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.560784, 1, 1, 1, 0.560784, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 147.57
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 13 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 36, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40, 23.5 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("FaceNodes/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Shake"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("FaceNodes/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, 0 ), Vector2( 1.5, -2.25 ), Vector2( 3, 1.16667 ), Vector2( 0.5, 2.08333 ), Vector2( 0, -1 ), Vector2( 0.25, -1.5 ), Vector2( -1.5, 0.333333 ), Vector2( 1.75, 0.666667 ), Vector2( 1, 1 ), Vector2( -0.25, 1.75 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("ReadySlamSFX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "advanced_play"
+} ]
+}
+
+[node name="FoeSlammer" type="KinematicBody2D" groups=["FoeSlammer"]]
+material = SubResource( 6 )
+script = ExtResource( 2 )
+max_hp = 2
+hit_squish = Vector2( 0.9, 1.1 )
+
+[node name="FaceNodes" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="SlamCast" type="RayCast2D" parent="FaceNodes"]
+enabled = true
+cast_to = Vector2( 0, 42 )
+collision_mask = 4
+
+[node name="ActivationArea" type="Area2D" parent="FaceNodes" groups=["FoeAreaException"]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="FaceNodes/ActivationArea"]
+visible = false
+position = Vector2( 0, 158.5 )
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="FaceNodes"]
+use_parent_material = true
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Gear" type="Sprite" parent="FaceNodes/Sprite"]
+material = SubResource( 7 )
+position = Vector2( -65, 10 )
+texture = ExtResource( 7 )
+
+[node name="Gear2" type="Sprite" parent="FaceNodes/Sprite"]
+material = SubResource( 7 )
+position = Vector2( 55, 10 )
+texture = ExtResource( 7 )
+
+[node name="Body" type="Sprite" parent="FaceNodes/Sprite"]
+use_parent_material = true
+position = Vector2( 0, 32.5 )
+texture = ExtResource( 8 )
+
+[node name="Ball" type="Sprite" parent="FaceNodes/Sprite"]
+use_parent_material = true
+position = Vector2( 0, -27.5 )
+texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="FaceNodes/Sprite"]
+position = Vector2( 0, 32.5 )
+texture = ExtResource( 6 )
+mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FaceNodes/Sprite"]
+anims/Movement = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+script = ExtResource( 9 )
+play_which = "Movement"
+
+[node name="Rings" type="Particles2D" parent="FaceNodes"]
+position = Vector2( 0, 40 )
+scale = Vector2( 0.554933, 0.554933 )
+amount = 4
+lifetime = 2.23
+speed_scale = 2.5
+process_material = SubResource( 11 )
+texture = ExtResource( 10 )
+
+[node name="SquishBox" type="Area2D" parent="FaceNodes"]
+modulate = Color( 0.364706, 0, 0.368627, 1 )
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FaceNodes/SquishBox"]
+position = Vector2( 0, 30.5 )
+shape = SubResource( 10 )
+
+[node name="OnTimer" type="Timer" parent="FaceNodes/SquishBox"]
+wait_time = 0.36
+one_shot = true
+autostart = true
+
+[node name="SlamSFX" type="AudioStreamPlayer" parent="FaceNodes/SquishBox"]
+volume_db = -7.0
+bus = "SFX"
+script = ExtResource( 12 )
+soundlist = [ ExtResource( 15 ), ExtResource( 14 ) ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 9
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2( 0, 6.5 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/Shake = SubResource( 5 )
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource( 4 )
+slam_speed = 550
+
+[node name="Unflash" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Rise" type="Timer" parent="."]
+wait_time = 1.85
+
+[node name="HitSFX" parent="." instance=ExtResource( 13 )]
+
+[node name="ReadySlamSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -2.0
+bus = "SFX"
+script = ExtResource( 12 )
+soundlist = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 16 ) ]
+
+[connection signal="body_entered" from="FaceNodes/ActivationArea" to="Movement" method="_on_ActivationArea_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="Movement" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Rise" to="Movement" method="_on_Rise_timeout"]

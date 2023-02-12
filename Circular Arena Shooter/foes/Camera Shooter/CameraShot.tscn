@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://classes/Shot.gd" type="Script" id=1]
+[ext_resource path="res://obj/Trail.gd" type="Script" id=2]
+[ext_resource path="res://foes/Camera Shooter/sprites/bullet2@2x.png" type="Texture" id=3]
+[ext_resource path="res://sounds/wind/wind.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 2.16942, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 9.0
+
+[node name="CameraShot" type="Area2D"]
+script = ExtResource( 1 )
+speed = 1.0
+player_shot = false
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2.98023e-07, 1 )
+rotation = -1.57079
+scale = Vector2( 0.716727, 0.716727 )
+texture = ExtResource( 3 )
+
+[node name="Trail" type="Line2D" parent="."]
+width_curve = SubResource( 1 )
+default_color = Color( 0.788235, 0.788235, 0.788235, 0.572549 )
+script = ExtResource( 2 )
+length = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
+
+[node name="WindSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -27.279
+autoplay = true
+bus = "Wind"

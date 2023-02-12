@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/qubodupImpactWood.ogg-80e9df8ca914d4af112ec7abbf2b0779.oggstr"
+
+[deps]
+
+source_file="res://sounds/qubodupImpact/qubodupImpactWood.ogg"
+dest_files=[ "res://.import/qubodupImpactWood.ogg-80e9df8ca914d4af112ec7abbf2b0779.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

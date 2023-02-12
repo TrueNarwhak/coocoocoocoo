@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://obj/weapons/shots/BasicShot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://classes/WeaponResource.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+shot = ExtResource( 1 )
+cooldown = 0.4
+ammo_hungry = 0.0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Clock_song-intro.mp3-947d60a37d41b574234fe4f4acff1cf9.mp3str"
+
+[deps]
+
+source_file="res://sounds/!music/final/Clock_song-intro.mp3"
+dest_files=[ "res://.import/Clock_song-intro.mp3-947d60a37d41b574234fe4f4acff1cf9.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

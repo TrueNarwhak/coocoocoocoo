@@ -1,0 +1,157 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://player/ControllerSimplfied.gd" type="Script" id=1]
+[ext_resource path="res://player/1x/Body.png" type="Texture" id=2]
+[ext_resource path="res://obj/Weapon.gd" type="Script" id=3]
+[ext_resource path="res://obj/weapons/BasicWeaponResource.tres" type="Resource" id=4]
+[ext_resource path="res://obj/Hitbox.gd" type="Script" id=5]
+[ext_resource path="res://player/1x/Wheel.png" type="Texture" id=6]
+[ext_resource path="res://assets/2x/Eyes2@2x.png" type="Texture" id=7]
+[ext_resource path="res://player/2x/Basic.png" type="Texture" id=8]
+[ext_resource path="res://player/Wheel.gd" type="Script" id=9]
+[ext_resource path="res://player/Sprites.gd" type="Script" id=10]
+[ext_resource path="res://shader/flash.gdshader" type="Shader" id=11]
+[ext_resource path="res://obj/DeathParticles.tscn" type="PackedScene" id=12]
+[ext_resource path="res://obj/RandomAudioStreamPlayer.gd" type="Script" id=13]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactPunch_medium_000.ogg" type="AudioStream" id=14]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactPunch_medium_001.ogg" type="AudioStream" id=15]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactPunch_heavy_001.ogg" type="AudioStream" id=16]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactSoft_medium_003.ogg" type="AudioStream" id=17]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactSoft_medium_001.ogg" type="AudioStream" id=18]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactSoft_medium_000.ogg" type="AudioStream" id=19]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactSoft_medium_002.ogg" type="AudioStream" id=20]
+[ext_resource path="res://sounds/shoot/shoot.ogg" type="AudioStream" id=21]
+[ext_resource path="res://sounds/shoot/shoot 2.ogg" type="AudioStream" id=22]
+[ext_resource path="res://sounds/shoot/shoot 3.ogg" type="AudioStream" id=23]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 11 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_mod = 0.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15, 5 )
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 24.0208
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 14.0
+
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource( 1 )
+max_speed = 220
+accel = 8
+fall = 41
+max_fall_speed = 60
+jump_height = 600
+air_resistance = 0.01
+particles = ExtResource( 12 )
+
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource( 4 )
+position = Vector2( 0, 24 )
+script = ExtResource( 10 )
+
+[node name="Main" type="Sprite" parent="Sprites"]
+use_parent_material = true
+position = Vector2( 0, -26.6768 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Eye" type="Sprite" parent="Sprites/Main"]
+use_parent_material = true
+position = Vector2( -2, -13.5968 )
+texture = ExtResource( 7 )
+offset = Vector2( 2, -0.314 )
+hframes = 4
+
+[node name="Wheel" type="Sprite" parent="Sprites"]
+use_parent_material = true
+position = Vector2( 0, -9.66244 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="WeaponHolder" type="Node2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2( 0, -24 )
+z_index = -10
+
+[node name="Sprite" type="Sprite" parent="Sprites/WeaponHolder"]
+use_parent_material = true
+position = Vector2( 23, -9 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="Position" type="Position2D" parent="Sprites/WeaponHolder"]
+position = Vector2( 30, -9 )
+
+[node name="SquashCast" type="RayCast2D" parent="Sprites"]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( 0, 19 )
+
+[node name="LandingArea" type="Area2D" parent="Sprites"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/LandingArea"]
+shape = SubResource( 3 )
+
+[node name="Unblink" type="Timer" parent="Sprites"]
+wait_time = 0.278
+
+[node name="LandSFX" type="AudioStreamPlayer" parent="Sprites"]
+volume_db = -14.345
+bus = "SFX"
+script = ExtResource( 13 )
+soundlist = [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 17 ) ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57079
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+modulate = Color( 0.384314, 1, 0, 1 )
+script = ExtResource( 5 )
+player_hitbox = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="CoyoteTime" type="Timer" parent="."]
+wait_time = 0.774
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="."]
+wait_time = 0.12
+one_shot = true
+
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Weapon" type="Node" parent="."]
+script = ExtResource( 3 )
+weapon_slot_1 = ExtResource( 4 )
+
+[node name="CoolDown" type="Timer" parent="Weapon"]
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="Weapon"]
+volume_db = -17.95
+bus = "Shots"
+script = ExtResource( 13 )
+soundlist = [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ]
+
+[node name="DamageSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -8.525
+bus = "SFX"
+script = ExtResource( 13 )
+soundlist = [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
+
+[connection signal="body_entered" from="Sprites/LandingArea" to="Sprites" method="_on_LandingArea_body_entered"]
+[connection signal="timeout" from="Sprites/Unblink" to="Sprites" method="_on_Unblink_timeout"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
+[connection signal="timeout" from="Weapon/CoolDown" to="Weapon" method="_on_CoolDown_timeout"]

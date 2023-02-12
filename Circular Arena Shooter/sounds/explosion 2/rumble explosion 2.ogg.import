@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rumble explosion 2.ogg-bbfea0951dd0f0c269d85b8ff90243ec.oggstr"
+
+[deps]
+
+source_file="res://sounds/explosion 2/rumble explosion 2.ogg"
+dest_files=[ "res://.import/rumble explosion 2.ogg-bbfea0951dd0f0c269d85b8ff90243ec.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rumble final 1.ogg-9661c3eb59c2a5ad0ec66f9e12357a15.oggstr"
+
+[deps]
+
+source_file="res://sounds/explosion 2/rumble final 1.ogg"
+dest_files=[ "res://.import/rumble final 1.ogg-9661c3eb59c2a5ad0ec66f9e12357a15.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://obj/RandomAudioStreamPlayer.gd" type="Script" id=1]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactPlate_medium_003.ogg" type="AudioStream" id=2]
+[ext_resource path="res://sounds/kenney_impactsounds/Audio/impactPlate_medium_004.ogg" type="AudioStream" id=3]
+
+[node name="HitSFX" type="AudioStreamPlayer"]
+volume_db = -11.9
+bus = "SFX"
+script = ExtResource( 1 )
+soundlist = [ ExtResource( 2 ), ExtResource( 3 ) ]
